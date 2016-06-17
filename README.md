@@ -25,7 +25,7 @@ mysql> CREATE DATABASE mydrivedb;
 
 mysql> \q
 
-$ git clone https://github.com/tecnico-softeng/es16al_07-project.git
+$ git clone git@github.com:JCoelhoo/Software-Engineering.git
 
 $ cd es16al_07-project
 
