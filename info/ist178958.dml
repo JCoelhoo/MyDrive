@@ -1,0 +1,96 @@
+package pt.tecnico.mydrive.domain;
+
+class User {
+	String _username;
+	String _name;
+	byte _umask;
+	boolean _isRoot;
+}
+
+class FileSystem {
+	
+}
+
+//abstract
+class Entry {
+	String _name;
+	byte _permission;
+	LocalDate _lastModified;
+}
+
+class Directory extends Entry {
+	
+}
+
+//abstract
+class File extends Entry {
+	String _content;
+	int _uniqueID;
+}
+
+class PlainFile extends File {
+	
+}
+
+class AppFile extends File {
+	
+}
+
+class LinkToFile extends File {
+	
+}
+
+relation DomainRootHasFileSystem {
+	  .pt.ist.fenixframework.DomainRoot playsRole root {
+	    multiplicity 0..1;
+	  }
+	  FileSystem playsRole filesystem {
+	    multiplicity 0..1;
+	  }
+}
+
+relation FileSystemRootDirectory {
+	  Directory playsRole rootDirectory {
+	    multiplicity 1;
+	  }
+	  FileSystem playsRole filesystem {
+	    multiplicity 1;
+	  }
+}
+
+relation FileSystemUsers {
+	  User playsRole user {
+	    multiplicity 1..*;
+	  }
+	  FileSystem playsRole filesystem {
+	    multiplicity 1;
+	  }
+}
+
+relation DirectoryEntries {
+	Directory playsRole parent {
+		multiplicity 1;
+	}
+	Entry playsRole child {
+		multiplicity 1..*; //at least 1 - parent
+	}
+}
+
+relation EntryOwner {
+	Entry playsRole ownedEntry {
+		multiplicity 0..*;  //a user may own no entries
+	}
+	User playsRole owner {
+		multiplicity 1;
+	}
+}
+
+relation UserHome {
+	Directory playsRole home {
+		multiplicity 1;
+	}
+	User playsRole homeOf {
+		multiplicity 0..1; //directories don't have to be home of a user
+	}
+}
+

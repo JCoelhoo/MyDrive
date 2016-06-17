@@ -1,0 +1,90 @@
+package pt.tecnico.mydrive.domain;
+
+class Filesystem{
+	
+}
+
+class Users{
+	String username;
+	String password;
+	String mask;
+}
+
+class User extends users{
+	
+}
+
+class Root extends users{
+	
+}
+
+class File{
+	String name;
+	String fileId;
+	String utilizador;
+	Date lastModified;
+	String creatorPermission;
+	String othersPermission;
+	String selfPath;
+}
+
+class PlainFile extends File{
+	String body;
+}
+
+class Dir extends File{
+
+}
+
+class Link extends File{
+	String pathToFile;
+}
+
+class Application extends plainFile{
+	
+}
+
+relation KnownFilesystem{
+	.pt.ist.fenixframework.DomainRoot playsRole DomainRoot;
+	Filesystem playsRole filesystem {multiplicity 0..*;}
+}
+
+relation UserFilesystem{
+	User playsRole user {multiplicity 1..*;}
+	Filesystem playsRole filesystem {multiplicity 1..1;}
+}
+
+relation RootUser{
+	Root playsRole root {multiplicity 1..1;}
+	Users playsRole users {multiplicity 1..1;}
+}
+
+relation User{
+	User playsRole user {multiplicity 0..*;}
+	Users playsRole user {multiplicity 1..1;}
+}
+
+relation FilesystemFiles{
+	Filesystem playsRole filesystem {multiplicity 1..1;}
+	File playsRole files {multiplicity 1..*;}
+}
+
+relation DirectoryFile{
+	Directory playsRole directory {multiplicity 1..1;}
+	File playsRole file {multiplicity 0..*;}
+}
+
+relation PlainFile{
+	PlainFile playsRole plainFile {multiplicity 1..1;}
+	File playsRole file {multiplicity 1..1;}
+}
+
+relation ApplicationFile{
+	Application playsRole application {multiplicity 1..1;}
+	File playsRole file {multiplicity 1..1;}
+}
+
+relation LinkFile{
+	Link playsRole link {multiplicity 1..1;}
+	File playsRole file {multiplicity 1..1;}
+}

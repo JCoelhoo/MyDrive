@@ -1,0 +1,27 @@
+[MyDrive| int entryCounter; long guestToken;]
+[User| String name; String username; String password; byte umask;]
+[User]^-[GuestUser]
+[GuestUser]
+[User]^-[RootUser]
+[RootUser]
+[Login| long token; long lastActivity; long timeToLive; boolean guest;]
+[Entry| String name; int entryID; byte permissions; DateTime lastModified;]
+[Entry]^-[PlainFile]
+[PlainFile| String content;]
+[Entry]^-[Directory]
+[Directory]
+[PlainFile]^-[App]
+[App]
+[PlainFile]^-[Link]
+[Link]
+[EnvironmentVariable| String name; String value;]
+[.pt.ist.fenixframework.DomainRoot]0..1 domainRoot - mydrive 0..1[MyDrive] // DomainRootHasMyDriveApplication
+[MyDrive]1 mydrive - user *[User] // MyDriveRegistersUsers
+[MyDrive]1 mydrive - login *[Login] // MyDriveRegistersLogins
+[Login]* login - user 1[User] // LoginHasUser
+[Login]* login - currentDir 1[Directory] // LoginHasCurrentDirectory
+[Login]1 login - environmentVariable *[EnvironmentVariable] // LoginHasEnvironmentVariables
+[User]1 owner - entry *[Entry] // UserOwnsEntries
+[User]  - home 1[Directory] // UserHasHome
+[Directory]1 parent - entry *[Entry] // DirectoryContainsEntries
+[MyDrive]1 mydrive - rootDirectory 1[Directory] // MyDriveHasRootDirectory
