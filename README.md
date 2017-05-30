@@ -1,7 +1,7 @@
 # MyDrive - es16al_07-project
 
 ###Project description:
-Domain ([PT] (https://fenix.tecnico.ulisboa.pt/downloadFile/1970943312268892/es16p0.pdf)/
+Domain ([PT](https://fenix.tecnico.ulisboa.pt/downloadFile/1970943312268892/es16p0.pdf)/
 [EN](https://fenix.tecnico.ulisboa.pt/downloadFile/1970943312268893/es16p0en.pdf))
 
 First Delivery ([PT](https://fenix.tecnico.ulisboa.pt/downloadFile/563568428731757/es16p1.pdf)/ 
